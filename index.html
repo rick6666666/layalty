@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>伴侣忠诚度测试</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0b0b12;color:#e6e6e6;line-height:1.6;padding:20px}
+.container{max-width:720px;margin:0 auto;background:#121218;border:1px solid #2a2a3a;border-radius:16px;overflow:hidden}
+.header{background:linear-gradient(90deg,#1a1a2e,#111122);padding:24px 20px;text-align:center;border-bottom:1px solid #2a2a3a}
+.header h1{font-size:22px;color:#f2f2ff;margin-bottom:8px}
+.header p{color:#9a9abd;font-size:14px}
+.main{padding:24px 20px}
+.question{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid #222230}
+.question h3{font-size:15px;color:#d1d1ff;margin-bottom:10px}
+.question label{display:block;padding:8px 12px;margin-bottom:6px;background:#181825;border:1px solid #252535;border-radius:8px;cursor:pointer;font-size:14px}
+.question label:hover{border-color:#4a4a7a}
+/* 下拉选择框样式 */
+.select-wrapper {
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+}
+.custom-select {
+    width: 100%;
+    padding: 10px 12px;
+    background: #181825;
+    border: 1px solid #252535;
+    border-radius: 8px;
+    color: #e6e6e6;
+    font-size: 14px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+}
+.custom-select:hover {
+    border-color: #4a4a7a;
+}
+.select-wrapper::after {
+    content: "▼";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: #9a9abd;
+    pointer-events: none;
+}
+.btn{width:100%;padding:14px;background:linear-gradient(90deg,#6a4dff,#8e6cff);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;margin-top:12px;cursor:pointer}
+.btn:active{transform:scale(.98)}
+.result{display:none;margin-top:30px;padding:24px;background:#161622;border:1px solid #33334a;border-radius:16px}
+.result h2{text-align:center;color:#f2f2ff;margin-bottom:12px}
+.level{text-align:center;font-size:18px;font-weight:700;margin:10px 0;color:#ffb400}
+.score{text-align:center;color:#fff;font-size:32px;font-weight:800;margin-bottom:16px;
+    text-shadow: 0 0 12px rgba(106, 77, 255, 0.9);
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, #6a4dff, #8e6cff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.desc{color:#c4c4e6;font-size:15px;line-height:1.7}
+.copy{margin-top:16px;background:#222235;color:#fff;padding:10px;border-radius:8px;border:none;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>伴侣忠诚度测试</h1>
+<p>心理学｜星座｜宿命忠诚</p>
+</div>
+<div class="main" id="test">
+<form id="form">
+
+<!-- 基础信息 8题 -->
+<div class="question">
+    <h3>1. 你的性别</h3>
+    <label><input type="radio" name="q1" value="2" required> 男</label>
+    <label><input type="radio" name="q1" value="2"> 女</label>
+</div>
+<div class="question">
+    <h3>2. 测试对象</h3>
+    <label><input type="radio" name="q2" value="2"> 男友</label>
+    <label><input type="radio" name="q2" value="2"> 女友</label>
+</div>
+
+<!-- 星座改为下拉选择框 -->
+<div class="question">
+    <h3>3. 你的星座</h3>
+    <div class="select-wrapper">
+        <select name="q3" class="custom-select" required>
+            <option value="" disabled selected>请选择你的星座</option>
+            <option value="2">白羊座</option>
+            <option value="2">金牛座</option>
+            <option value="2">双子座</option>
+            <option value="2">巨蟹座</option>
+            <option value="2">狮子座</option>
+            <option value="2">处女座</option>
+            <option value="2">天秤座</option>
+            <option value="2">天蝎座</option>
+            <option value="2">射手座</option>
+            <option value="2">摩羯座</option>
+            <option value="2">水瓶座</option>
+            <option value="2">双鱼座</option>
+        </select>
+    </div>
+</div>
+
+<div class="question">
+    <h3>4. 对方星座</h3>
+    <div class="select-wrapper">
+        <select name="q4" class="custom-select" required>
+            <option value="" disabled selected>请选择对方的星座</option>
+            <option value="2">白羊座</option>
+            <option value="2">金牛座</option>
+            <option value="2">双子座</option>
+            <option value="2">巨蟹座</option>
+            <option value="2">狮子座</option>
+            <option value="2">处女座</option>
+            <option value="2">天秤座</option>
+            <option value="2">天蝎座</option>
+            <option value="2">射手座</option>
+            <option value="2">摩羯座</option>
+            <option value="2">水瓶座</option>
+            <option value="2">双鱼座</option>
+        </select>
+    </div>
+</div>
+
+<!-- 出生时辰拆分为单个时辰选项，改为下拉框 -->
+<div class="question">
+    <h3>5. 你的出生时辰</h3>
+    <div class="select-wrapper">
+        <select name="q5" class="custom-select" required>
+            <option value="" disabled selected>请选择你的出生时辰</option>
+            <option value="2">子时 (23:00-00:59)</option>
+            <option value="2">丑时 (01:00-02:59)</option>
+            <option value="2">寅时 (03:00-04:59)</option>
+            <option value="2">卯时 (05:00-06:59)</option>
+            <option value="2">辰时 (07:00-08:59)</option>
+            <option value="2">巳时 (09:00-10:59)</option>
+            <option value="2">午时 (11:00-12:59)</option>
+            <option value="2">未时 (13:00-14:59)</option>
+            <option value="2">申时 (15:00-16:59)</option>
+            <option value="2">酉时 (17:00-18:59)</option>
+            <option value="2">戌时 (19:00-20:59)</option>
+            <option value="2">亥时 (21:00-22:59)</option>
+            <option value="1">不知道</option>
+        </select>
+    </div>
+</div>
+
+<div class="question">
+    <h3>6. 对方出生时辰</h3>
+    <div class="select-wrapper">
+        <select name="q6" class="custom-select" required>
+            <option value="" disabled selected>请选择对方的出生时辰</option>
+            <option value="2">子时 (23:00-00:59)</option>
+            <option value="2">丑时 (01:00-02:59)</option>
+            <option value="2">寅时 (03:00-04:59)</option>
+            <option value="2">卯时 (05:00-06:59)</option>
+            <option value="2">辰时 (07:00-08:59)</option>
+            <option value="2">巳时 (09:00-10:59)</option>
+            <option value="2">午时 (11:00-12:59)</option>
+            <option value="2">未时 (13:00-14:59)</option>
+            <option value="2">申时 (15:00-16:59)</option>
+            <option value="2">酉时 (17:00-18:59)</option>
+            <option value="2">戌时 (19:00-20:59)</option>
+            <option value="2">亥时 (21:00-22:59)</option>
+            <option value="1">不知道</option>
+        </select>
+    </div>
+</div>
+
+<div class="question">
+    <h3>7. 是否算过星座相关运势</h3>
+    <label><input type="radio" name="q7" value="3"> 经常，非常信</label>
+    <label><input type="radio" name="q7" value="2"> 算过，当参考</label>
+    <label><input type="radio" name="q7" value="1"> 没算过</label>
+    <label><input type="radio" name="q7" value="0"> 不信</label>
+</div>
+
+<div class="question">
+    <h3>8. 你们关系属于</h3>
+    <label><input type="radio" name="q8" value="3"> 天选宿命</label>
+    <label><input type="radio" name="q8" value="2"> 日久生情</label>
+    <label><input type="radio" name="q8" value="1"> 一时心动</label>
+    <label><input type="radio" name="q8" value="0"> 将就陪伴</label>
+</div>
+
+<!-- 40题 心理学核心题 统一分值：A=5 B=3 C=1 D=0 -->
+<div class="question"><h3>9. 你忙未回消息，对方表现</h3><label><input type="radio" name="q9" value="5"> 安心理解</label><label><input type="radio" name="q9" value="3"> 轻微不安</label><label><input type="radio" name="q9" value="1"> 频繁追问</label><label><input type="radio" name="q9" value="0"> 生气冷战</label></div>
+<div class="question"><h3>10. 对方是否暴露脆弱</h3><label><input type="radio" name="q10" value="5"> 完全愿意</label><label><input type="radio" name="q10" value="3"> 愿意但保留</label><label><input type="radio" name="q10" value="1"> 很少暴露</label><label><input type="radio" name="q10" value="0"> 从不暴露</label></div>
+<div class="question"><h3>11. 情绪感知能力</h3><label><input type="radio" name="q11" value="5"> 极其敏感</label><label><input type="radio" name="q11" value="3"> 能察觉</label><label><input type="radio" name="q11" value="1"> 经常不觉</label><label><input type="radio" name="q11" value="0"> 毫不在意</label></div>
+<div class="question"><h3>12. 你需要陪伴时</h3><label><input type="radio" name="q12" value="5"> 主动陪伴</label><label><input type="radio" name="q12" value="3"> 愿意陪</label><label><input type="radio" name="q12" value="1"> 敷衍应付</label><label><input type="radio" name="q12" value="0"> 直接拒绝</label></div>
+<div class="question"><h3>13. 是否主动公开关系</h3><label><input type="radio" name="q13" value="5"> 全网公开</label><label><input type="radio" name="q13" value="3"> 正常公开</label><label><input type="radio" name="q13" value="1"> 仅朋友知</label><label><input type="radio" name="q13" value="0"> 隐藏单身</label></div>
+<div class="question"><h3>14. 手机对你开放度</h3><label><input type="radio" name="q14" value="5"> 随便看</label><label><input type="radio" name="q14" value="3"> 愿给密码</label><label><input type="radio" name="q14" value="1"> 不让看</label><label><input type="radio" name="q14" value="0"> 严防死守</label></div>
+<div class="question"><h3>15. 是否主动与异性避嫌</h3><label><input type="radio" name="q15" value="5"> 自觉避嫌</label><label><input type="radio" name="q15" value="3"> 提醒后注意</label><label><input type="radio" name="q15" value="1"> 不改</label><label><input type="radio" name="q15" value="0"> 故意暧昧</label></div>
+<div class="question"><h3>16. 异性撩拨对方反应</h3><label><input type="radio" name="q16" value="5"> 拒绝并告知</label><label><input type="radio" name="q16" value="3"> 不回应</label><label><input type="radio" name="q16" value="1"> 礼貌聊天</label><label><input type="radio" name="q16" value="0"> 积极回应</label></div>
+<div class="question"><h3>17. 主动亲密行为</h3><label><input type="radio" name="q17" value="5"> 高频自然</label><label><input type="radio" name="q17" value="3"> 正常频率</label><label><input type="radio" name="q17" value="1"> 很少主动</label><label><input type="radio" name="q17" value="0"> 几乎没有</label></div>
+<div class="question"><h3>18. 是否愿意规划未来</h3><label><input type="radio" name="q18" value="5"> 主动清晰</label><label><input type="radio" name="q18" value="3"> 愿意模糊</label><label><input type="radio" name="q18" value="1"> 回避未来</label><label><input type="radio" name="q18" value="0"> 拒绝讨论</label></div>
+<div class="question"><h3>19. 精神交流深度</h3><label><input type="radio" name="q19" value="5"> 灵魂共鸣</label><label><input type="radio" name="q19" value="3"> 偶尔深度</label><label><input type="radio" name="q19" value="1"> 只聊日常</label><label><input type="radio" name="q19" value="0"> 几乎无交流</label></div>
+<div class="question"><h3>20. 你生病困难时</h3><label><input type="radio" name="q20" value="5"> 全程照顾</label><label><input type="radio" name="q20" value="3"> 关心帮助</label><label><input type="radio" name="q20" value="1"> 口头安慰</label><label><input type="radio" name="q20" value="0"> 无视不耐烦</label></div>
+<div class="question"><h3>21. 前任联系方式</h3><label><input type="radio" name="q21" value="5"> 早已删除</label><label><input type="radio" name="q21" value="3"> 不删不聊</label><label><input type="radio" name="q21" value="1"> 偶尔联系</label><label><input type="radio" name="q21" value="0"> 频繁隐瞒</label></div>
+<div class="question"><h3>22. 是否单独与异性出门</h3><label><input type="radio" name="q22" value="5"> 绝对不会</label><label><input type="radio" name="q22" value="3"> 提前报备</label><label><input type="radio" name="q22" value="1"> 偶尔不告</label><label><input type="radio" name="q22" value="0"> 经常隐瞒</label></div>
+<div class="question"><h3>23. 占有欲与偏爱</h3><label><input type="radio" name="q23" value="5"> 健康偏爱</label><label><input type="radio" name="q23" value="3"> 正常占有</label><label><input type="radio" name="q23" value="1"> 几乎没有</label><label><input type="radio" name="q23" value="0"> 对别人热情</label></div>
+<div class="question"><h3>24. 记得你的喜好与日子</h3><label><input type="radio" name="q24" value="5"> 全部牢记</label><label><input type="radio" name="q24" value="3"> 大部分</label><label><input type="radio" name="q24" value="1"> 重要日子</label><label><input type="radio" name="q24" value="0"> 完全不记</label></div>
+<div class="question"><h3>25. 为你付出时间金钱精力</h3><label><input type="radio" name="q25" value="5"> 心甘情愿</label><label><input type="radio" name="q25" value="3"> 愿意对等</label><label><input type="radio" name="q25" value="1"> 计较得失</label><label><input type="radio" name="q25" value="0"> 只索取</label></div>
+<div class="question"><h3>26. 吵架后谁先缓和</h3><label><input type="radio" name="q26" value="5"> 永远对方</label><label><input type="radio" name="q26" value="3"> 轮流低头</label><label><input type="radio" name="q26" value="1"> 永远你</label><label><input type="radio" name="q26" value="0"> 冷暴力</label></div>
+<div class="question"><h3>27. 是否为你改坏习惯</h3><label><input type="radio" name="q27" value="5"> 主动改变</label><label><input type="radio" name="q27" value="3"> 提出愿改</label><label><input type="radio" name="q27" value="1"> 口头不改</label><label><input type="radio" name="q27" value="0"> 拒绝指责</label></div>
+<div class="question"><h3>28. 对你是否毫无保留</h3><label><input type="radio" name="q28" value="5"> 完全透明</label><label><input type="radio" name="q28" value="3"> 小事隐瞒</label><label><input type="radio" name="q28" value="1"> 经常撒谎</label><label><input type="radio" name="q28" value="0"> 习惯性欺骗</label></div>
+<div class="question"><h3>29. 星座性格契合度</h3><label><input type="radio" name="q29" value="5"> 高度契合</label><label><input type="radio" name="q29" value="3"> 基本契合</label><label><input type="radio" name="q29" value="1"> 不太契合</label><label><input type="radio" name="q29" value="0"> 完全不合</label></div>
+<div class="question"><h3>30. 面对性格不合对方态度</h3><label><input type="radio" name="q30" value="5"> 只信你</label><label><input type="radio" name="q30" value="3"> 有点介意</label><label><input type="radio" name="q30" value="1"> 非常介意</label><label><input type="radio" name="q30" value="0"> 以此疏远</label></div>
+<div class="question"><h3>31. 是否相信宿命缘分</h3><label><input type="radio" name="q31" value="5"> 深信天选</label><label><input type="radio" name="q31" value="3"> 半信半疑</label><label><input type="radio" name="q31" value="1"> 只看现实</label><label><input type="radio" name="q31" value="0"> 只信自己</label></div>
+<div class="question"><h3>32. 是否把你当命中注定</h3><label><input type="radio" name="q32" value="5"> 明确天命</label><label><input type="radio" name="q32" value="3"> 心里认可</label><label><input type="radio" name="q32" value="1"> 从不说</label><label><input type="radio" name="q32" value="0"> 只是过客</label></div>
+<div class="question"><h3>33. 情感专一底线</h3><label><input type="radio" name="q33" value="5"> 绝对专一</label><label><input type="radio" name="q33" value="3"> 思想游离</label><label><input type="radio" name="q33" value="1"> 轻微越界</label><label><input type="radio" name="q33" value="0"> 多次越界</label></div>
+<div class="question"><h3>34. 是否冷暴力惩罚你</h3><label><input type="radio" name="q34" value="5"> 从不会</label><label><input type="radio" name="q34" value="3"> 偶尔</label><label><input type="radio" name="q34" value="1"> 经常</label><label><input type="radio" name="q34" value="0"> 习惯冷暴力</label></div>
+<div class="question"><h3>35. 是否尊重你亲友</h3><label><input type="radio" name="q35" value="5"> 非常尊重</label><label><input type="radio" name="q35" value="3"> 正常礼貌</label><label><input type="radio" name="q35" value="1"> 私下反感</label><label><input type="radio" name="q35" value="0"> 贬低不尊重</label></div>
+<div class="question"><h3>36. 为你拒绝所有暧昧</h3><label><input type="radio" name="q36" value="5"> 自动屏蔽</label><label><input type="radio" name="q36" value="3"> 提醒后拒</label><label><input type="radio" name="q36" value="1"> 不拒绝</label><label><input type="radio" name="q36" value="0"> 主动寻找</label></div>
+<div class="question"><h3>37. 你在关系中的安全感</h3><label><input type="radio" name="q37" value="5"> 极度安全</label><label><input type="radio" name="q37" value="3"> 比较安全</label><label><input type="radio" name="q37" value="1"> 经常不安</label><label><input type="radio" name="q37" value="0"> 毫无安全感</label></div>
+<div class="question"><h3>38. 是否主动报备行程</h3><label><input type="radio" name="q38" value="5"> 主动说</label><label><input type="radio" name="q38" value="3"> 问了说</label><label><input type="radio" name="q38" value="1"> 问了敷衍</label><label><input type="radio" name="q38" value="0"> 拒绝告知</label></div>
+<div class="question"><h3>39. 是否在社交平台隐藏你</h3><label><input type="radio" name="q39" value="5"> 从不隐藏</label><label><input type="radio" name="q39" value="3"> 不常发</label><label><input type="radio" name="q39" value="1"> 选择性隐藏</label><label><input type="radio" name="q39" value="0"> 全面隐藏</label></div>
+<div class="question"><h3>40. 是否为你拒绝无效社交</h3><label><input type="radio" name="q40" value="5"> 非常愿意</label><label><input type="radio" name="q40" value="3"> 必要时愿</label><label><input type="radio" name="q40" value="1"> 不愿意</label><label><input type="radio" name="q40" value="0"> 故意忽视你</label></div>
+<div class="question"><h3>41. 你提忠诚疑虑对方反应</h3><label><input type="radio" name="q41" value="5"> 耐心安抚</label><label><input type="radio" name="q41" value="3"> 解释不耐</label><label><input type="radio" name="q41" value="1"> 指责你多疑</label><label><input type="radio" name="q41" value="0"> 暴怒毁证</label></div>
+<div class="question"><h3>42. 是否对你付出感恩</h3><label><input type="radio" name="q42" value="5"> 非常感恩</label><label><input type="radio" name="q42" value="3"> 记得你好</label><label><input type="radio" name="q42" value="1"> 理所当然</label><label><input type="radio" name="q42" value="0"> 挑剔嫌弃</label></div>
+<div class="question"><h3>43. 低谷期是否不离不弃</h3><label><input type="radio" name="q43" value="5"> 坚定陪伴</label><label><input type="radio" name="q43" value="3"> 陪伴消极</label><label><input type="radio" name="q43" value="1"> 敷衍想逃</label><label><input type="radio" name="q43" value="0"> 直接离开</label></div>
+<div class="question"><h3>44. 你是否在优先级前列</h3><label><input type="radio" name="q44" value="5"> 永远第一</label><label><input type="radio" name="q44" value="3"> 比较重要</label><label><input type="radio" name="q44" value="1"> 一般位置</label><label><input type="radio" name="q44" value="0"> 可有可无</label></div>
+<div class="question"><h3>45. 是否愿意为你牺牲利益</h3><label><input type="radio" name="q45" value="5"> 毫不犹豫</label><label><input type="radio" name="q45" value="3"> 愿意犹豫</label><label><input type="radio" name="q45" value="1"> 不愿意自私</label><label><input type="radio" name="q45" value="0"> 牺牲你利益</label></div>
+<div class="question"><h3>46. 是否突然消失失联</h3><label><input type="radio" name="q46" value="5"> 从没有</label><label><input type="radio" name="q46" value="3"> 极少有原因</label><label><input type="radio" name="q46" value="1"> 偶尔发生</label><label><input type="radio" name="q46" value="0"> 经常无故</label></div>
+<div class="question"><h3>47. 对感情是否专一负责</h3><label><input type="radio" name="q47" value="5"> 高度负责</label><label><input type="radio" name="q47" value="3"> 基本负责</label><label><input type="radio" name="q47" value="1"> 不太负责</label><label><input type="radio" name="q47" value="0"> 玩弄感情</label></div>
+<div class="question"><h3>48. 对方对你忠诚一句话</h3><label><input type="radio" name="q48" value="5"> 命定唯一，至死不渝</label><label><input type="radio" name="q48" value="4"> 真心偏爱，忠诚稳定</label><label><input type="radio" name="q48" value="3"> 普通喜欢，忠诚一般</label><label><input type="radio" name="q48" value="2"> 犹豫不定，忠诚薄弱</label><label><input type="radio" name="q48" value="1"> 自私自我，忠诚低下</label><label><input type="radio" name="q48" value="0"> 虚情假意，毫无忠诚</label></div>
+
+<button type="submit" class="btn">立即测算忠诚度</button>
+</form>
+</div>
+
+<div class="result" id="result">
+<h2>你的伴侣忠诚报告</h2>
+<div class="level" id="level"></div>
+<div class="score" id="score"></div>
+<div class="desc" id="desc"></div>
+<button class="copy" onclick="copyResult()">复制结果</button>
+</div>
+</div>
+
+<script>
+const form = document.getElementById('form');
+form.addEventListener('submit', e => {
+e.preventDefault();
+let total = 0;
+const all = new FormData(form);
+for(let v of all.values()) total += parseInt(v);
+const max = 224;
+const percent = Math.round(total/max*100);
+showResult(percent);
+document.getElementById('test').style.display='none';
+document.getElementById('result').style.display='block';
+});
+
+function showResult(p){
+const elvl = document.getElementById('level');
+const escore = document.getElementById('score');
+const edesc = document.getElementById('desc');
+escore.textContent = `忠诚度：${p}%`;
+let lvl,text;
+if(p>=96){
+    lvl='Lv.7 天命绝恋级';
+    text='你们是星座性格双契合的天选恋人，心理学依恋模式高度匹配，对方对你的忠诚已经刻入宿命的基因里。在这段关系中，ta会将你视为生命中不可替代的唯一，无论是顺境还是逆境，都会坚定地选择你、守护你。这种忠诚并非一时的冲动，而是源于灵魂深处的共鸣和对这份感情的极致珍视，是真正意义上的人间理想型伴侣。在日常相处中，ta会主动将你融入自己的人生规划，无论是生活中的小事还是人生的重大决策，都会优先考虑你的感受和需求。即使面对外界的诱惑和考验，ta的选择也永远是你，这份忠诚经得起时间和现实的双重检验，是可遇不可求的宿命良缘。';
+}
+else if(p>=85){
+    lvl='Lv.6 至死忠一级';
+    text='你们的感情建立在深度的亲密联结和坚定的承诺之上，对方对你保持着极高的专一性和稳定性。ta会主动为你拒绝所有外界的诱惑，将你的感受放在首位，用实际行动诠释什么是真正的偏爱。虽然偶尔可能会有小的摩擦，但在忠诚这件事上，ta从未有过丝毫动摇，是能够与你携手走过漫长人生的稳定伴侣。ta懂得尊重你的边界，也会主动维护你们的关系，在你需要的时候总能及时出现，用陪伴和行动证明自己的心意。这种忠诚不是轰轰烈烈的誓言，而是融入在每一个平凡日子里的坚守，是细水长流的温暖与安心。';
+}
+else if(p>=72){
+    lvl='Lv.5 真心稳恋级';
+    text='你们的感情基础十分稳固，对方的忠诚度处于优秀水平，星座与性格的适配度也较高。ta是真心实意地爱着你，在日常相处中会处处偏向你，愿意为你付出时间和精力，也会主动维护你们的关系。虽然可能不会有轰轰烈烈的表达，但这份忠诚体现在每一个细微的日常里，只要用心经营，这段感情能够长久且稳定地走下去。ta会记得你的喜好和重要的日子，会在你难过时给予安慰，在你成功时真心祝福。偶尔的小矛盾和小误会不会影响核心的忠诚，只要双方保持良好的沟通，这份感情就能在平稳中持续升温。';
+}
+else if(p>=58){
+    lvl='Lv.4 宿命普通级';
+    text='你们之间有真实的喜欢和陪伴，但对方的忠诚还未达到极致的程度。星座性格之间存在轻微的特质冲突，反映在关系中就是偶尔会出现一些小的信任危机。对方对你有感情，但也保留了部分自我空间，面对外界的诱惑时可能会有短暂的犹豫。不过只要双方能够坦诚沟通，明确彼此的边界和期待，这段关系依然有很大的成长空间。ta对你的付出是真实的，但还不够彻底，需要你用耐心和理解去引导，同时也要建立清晰的关系规则，让彼此都明白忠诚的重要性。只要共同努力，这份感情依然有机会走向更稳定的状态。';
+}
+else if(p>=42){
+    lvl='Lv.3 游离观望级';
+    text='对方对你的感情不够坚定，忠诚度处于中游水平且波动较大。ta在这段关系中更多考虑的是自身的感受，容易被外界的新鲜事物所吸引，面对诱惑时缺乏足够的抵抗力。这种游离的状态让你时常感到不安，而对方也缺乏主动修复关系的意愿。若想改善现状，需要明确建立关系的边界和规则，引导对方树立正确的感情观。ta可能会在口头上承诺忠诚，但行动上却常常让人失望，需要你认真审视这段关系是否值得继续投入。如果对方始终不愿为你做出改变，那么及时止损或许是更明智的选择。';
+}
+else if(p>=25){
+    lvl='Lv.2 虚情寡忠级';
+    text='你们的感情基础十分薄弱，对方的忠诚度处于较低水平。ta与你在一起更多是出于寂寞或暂时的需求，而非真心的选择。在这段关系中，ta既不愿意为你付出，也不懂得珍惜你的好，甚至会在暗中与其他异性保持暧昧联系。这种虚假的陪伴无法带来真正的幸福，需要你认真思考这段关系是否值得继续投入。ta的言行常常不一致，承诺的事情很少兑现，对你的态度也忽冷忽热，让你在这段关系中受尽委屈。与其继续消耗自己，不如勇敢地放手，去寻找真正懂得珍惜你的人。';
+}
+else{
+    lvl='Lv.1 宿命危恋级';
+    text='对方属于典型的危险型伴侣，完全没有忠诚的底线和意识。星座性格的相冲在这段关系中体现得淋漓尽致，ta不仅无法给你带来任何安全感，还会不断消耗你的情感和精力。这段关系充满了欺骗和背叛的风险，继续坚持只会让你受到更深的伤害，建议你及时止损，保护好自己的情感和尊严，去寻找真正值得的人。ta习惯用谎言和伪装来维持关系，在背后却早已做出了背叛的行为，你的真心和付出在ta看来一文不值。及时离开这段不健康的关系，才是对自己最好的保护。';
+}
+elvl.textContent = lvl;
+edesc.textContent = text;
+}
+
+function copyResult(){
+const t = document.getElementById('level').textContent+' '+document.getElementById('score').textContent+' '+document.getElementById('desc').textContent;
+navigator.clipboard.writeText(t);alert('已复制结果');
+}
+</script>
+</body>
+</html>
